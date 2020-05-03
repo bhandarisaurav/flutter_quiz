@@ -15,31 +15,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final questions = [
+    {
+      "question": "What is your favourite color",
+      "answers": ["Red", "Green", "Purple", "Red"]
+    },
+    {
+      "question": "What is the color of the sky?",
+      "answers": ["Orange", "White", "Blue", "Purple"]
+    },
+    {
+      "question": "In which country do you live?",
+      "answers": ["USA", "UK", "Nepal", "India"]
+    }
+  ];
   var _questionIndex = 0;
 
   void _answerQuestion() {
     print(_questionIndex);
+    print(questions[_questionIndex]);
     setState(() {
-      _questionIndex >= 1 ? _questionIndex = 0 : _questionIndex++;
+      _questionIndex < questions.length - 1
+          ? _questionIndex++
+          : _questionIndex = 0;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      {
-        "question": "What is your favourite color",
-        "answers": ["Red", "Green", "Purple", "Red"]
-      },
-      {
-        "question": "What is the color of the sky?",
-        "answers": ["Orange", "White", "Blue", "Purple"]
-      },
-      {
-        "question": "In which country do you live?",
-        "answers": ["USA", "UK", "Nepal", "India"]
-      }
-    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -61,10 +64,10 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: <Widget>[
           Question(questions[_questionIndex]["question"]),
-          Answer(_answerQuestion, "Answer 1"),
-          Answer(_answerQuestion, "Answer 2"),
-          Answer(_answerQuestion, "Answer 3"),
-          Answer(_answerQuestion, "Answer 4"),
+          ...(questions[_questionIndex]["answers"] as List<String>)
+              .map((answer) {
+            return Answer(_answerQuestion, answer);
+          }).toList()
         ],
       ),
     );
