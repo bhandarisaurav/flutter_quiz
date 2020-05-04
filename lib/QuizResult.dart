@@ -25,7 +25,7 @@ class QuizResult extends StatelessWidget {
             child: Text(
               "Congratulations",
               style: TextStyle(
-                fontSize: 38,
+                fontSize: 37,
                 fontWeight: FontWeight.bold,
               ),
             ),
