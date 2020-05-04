@@ -8,18 +8,20 @@ class Answer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: 150,
+      margin: EdgeInsets.all(10),
       child: RaisedButton(
         color: Colors.red,
+        padding: EdgeInsets.all(15),
         child: Text(
           _answer,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
         ),
-        onPressed: _answerHandler,
+        onPressed:  () => _answerHandler(_answer),
       ),
     );
   }
